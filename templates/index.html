@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather</title>
+    
+    <link rel="icon" href="{{url_for('static',filename='weather.png')}}">
+    <link rel="stylesheet" href="{{url_for('static',filename='style.css')}}">
+</head>
+
+<body>
+    <div class="main-content">
+        <header><h1>Weather</h1></header>
+
+        <p>Search your City, Area or PIN..</p>
+
+        <form method="POST">
+            <input class="form-control" name="city" placeholder="Location">
+            <button>Search</button>
+        </form>
+        <p>
+            {% if weather.message!="city not found" and weather.city!=""%}
+            <span style="font-size: 35px;font-weight: bold;text-decoration: underline;text-transform: uppercase;">{{weather.city}}, {{weather.country}}</span><br>
+            <span><img src={{weather.icon}} height="100" width="150" alt="weather status appears here"></span><br>
+            <span style="font-size: 20px;font-weight:600;text-transform: capitalize;">{{weather.descrip}}</span><br><br>
+            <span>Temperature:{{weather.temp}}</span><br>
+            <span>Pressure:{{weather.pressure}}</span><br>
+            <span>Humidity:{{weather.humidity}}</span><br>
+            <span>Wind Speed:{{weather.wind_speed}}</span><br>
+            {% elif weather.message=="city not found" %}
+            <span style="font-size: 35px;font-weight: bold;">{{weather.city}}- Location Not Found</span><br>
+            {% endif %}
+        </p>
+
+    </div>
+    <footer>Created by SPK</footer>
+</body>
+
+</html>
